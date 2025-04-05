@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './variables.css';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-black text-white font-sans;
+    background: radial-gradient(circle at 50% 50%, rgba(13, 13, 13, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
+  
+  /* Variable font settings */
+  .variable-font {
+    font-variation-settings: "wght" var(--font-weight, 400), "opsz" var(--font-optical-size, 14);
+    transition: font-variation-settings 0.3s ease;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 backdrop-blur-sm;
+  }
+  
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-105 focus:ring-indigo-600;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 text-white hover:shadow-lg hover:shadow-rose-500/30 hover:scale-105 focus:ring-rose-500;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-105 focus:ring-indigo-500;
+  }
+  
+  .section {
+    @apply py-20 md:py-28;
+  }
+  
+  .heading-xl {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight;
+  }
+  
+  .heading-lg {
+    @apply text-4xl md:text-5xl font-bold leading-tight tracking-tight;
+  }
+  
+  .heading-md {
+    @apply text-3xl md:text-4xl font-bold leading-tight tracking-tight;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-text;
+  }
+  
+  /* New gradient text variations for maximalist design */
+  .gradient-text-neon {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-pink to-neon-purple animate-text;
+  }
+  
+  .gradient-text-vibrant {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-green via-neon-yellow to-neon-pink animate-text;
+  }
+  
+  .card {
+    @apply p-6 bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-800 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 hover:scale-[1.02];
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
+  }
+
+  .neon-border {
+    @apply relative;
+  }
+
+  .neon-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 -z-10 blur-md opacity-70;
+    transform: scale(1.02);
+  }
+  
+  /* Enhanced neon border for maximalist design */
+  .neon-border-intense {
+    @apply relative;
+  }
+  
+  .neon-border-intense::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl bg-gradient-to-r from-neon-blue via-neon-pink to-neon-purple -z-10 blur-md opacity-90;
+    transform: scale(1.03);
+    animation: borderPulse 3s infinite alternate;
+  }
+  
+  @keyframes borderPulse {
+    0% {
+      opacity: 0.7;
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(12px);
+    }
+  }
+
+  .animate-text {
+    background-size: 200% 200%;
+    animation: textShimmer 5s ease infinite;
+  }
+
+  @keyframes textShimmer {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  /* Kinetic Typography Classes */
+  .kinetic-text-container {
+    @apply overflow-hidden relative;
+  }
+  
+  .kinetic-char {
+    @apply inline-block transition-all duration-300;
+  }
+  
+  .kinetic-char-float {
+    @apply animate-char-float;
+    animation-delay: calc(var(--char-index) * 0.1s);
+  }
+  
+  .kinetic-char-wave {
+    @apply animate-text-wave;
+    animation-delay: calc(var(--char-index) * 0.08s);
+  }
+  
+  .kinetic-char-bounce {
+    @apply animate-text-bounce;
+    animation-delay: calc(var(--char-index) * 0.05s);
+  }
+  
+  .kinetic-text-stretch {
+    @apply animate-text-stretch;
+  }
+  
+  /* Variable font text that changes with scroll */
+  .variable-weight-text {
+    font-variation-settings: "wght" var(--font-weight, 400);
+    transition: font-variation-settings 0.3s ease;
+  }
+  
+  /* Maximalist design elements */
+  .maximalist-bg {
+    @apply relative overflow-hidden;
+    background: radial-gradient(circle at 50% 50%, rgba(13, 13, 13, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  }
+  
+  .maximalist-bg::before {
+    content: '';
+    @apply absolute inset-0 opacity-20;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(157, 78, 221, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 60%);
+  }
+  
+  .noise-overlay {
+    @apply absolute inset-0 opacity-10 pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  
+  /* Experimental grid layouts for maximalist design */
+  .maximalist-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6;
+    grid-template-areas: 
+      "a a b"
+      "c d d"
+      "e f f";
+  }
+  
+  .grid-area-a { grid-area: a; }
+  .grid-area-b { grid-area: b; }
+  .grid-area-c { grid-area: c; }
+  .grid-area-d { grid-area: d; }
+  .grid-area-e { grid-area: e; }
+  .grid-area-f { grid-area: f; }
+  
+  /* Diagonal text */
+  .diagonal-text {
+    transform: rotate(-5deg);
+    @apply inline-block font-bold;
+  }
+  
+  /* Custom text shadows */
+  .text-shadow-soft {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+  .text-shadow-strong {
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  }
+}
