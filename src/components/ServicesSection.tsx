@@ -3,7 +3,14 @@
 import { useEffect, useState, useRef, ReactNode } from 'react';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { FiMonitor, FiSmartphone, FiShoppingCart, FiPackage, FiArrowRight } from 'react-icons/fi';
-import LottieAnimation from './LottieAnimation';
+import dynamic from 'next/dynamic';
+
+// Dynamically import LottieAnimation, disabling SSR
+const LottieAnimation = dynamic(() => import('./LottieAnimation'), {
+  ssr: false,
+  // Optional: Add a simple loading fallback
+  loading: () => <div className="w-28 h-28 flex items-center justify-center text-gray-400 text-sm">Loading Animation...</div>,
+});
 
 // Define the Service type
 interface Service {
@@ -122,22 +129,27 @@ export default function ServicesSection() {
   
   // Load animation data
   useEffect(() => {
-    const loadAnimations = async () => {
-      const loadedData: {[key: string]: any} = {};
-      for (const service of services) {
-        try {
-          const response = await fetch(service.animationPath);
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-          const data = await response.json();
-          loadedData[service.id] = data;
-        } catch (error) {
-          console.error(`Failed to load animation for ${service.title}:`, error);
+    // Ensure fetch only runs client-side
+    if (typeof window !== 'undefined') {
+      const loadAnimations = async () => {
+        const loadedData: {[key: string]: any} = {};
+        for (const service of services) {
+          try {
+            const response = await fetch(service.animationPath);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            loadedData[service.id] = data;
+          } catch (error) {
+            console.error(`Failed to load animation for ${service.title}:`, error);
+            // Assign null or a fallback indicator if loading fails
+            loadedData[service.id] = null; 
+          }
         }
-      }
-      setAnimationDataMap(loadedData);
-    };
-    
-    loadAnimations();
+        setAnimationDataMap(loadedData);
+      };
+      
+      loadAnimations();
+    }
   }, []);
   
   return (
