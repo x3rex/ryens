@@ -93,8 +93,11 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.2 }}
         onClick={() => {
-          const nextSection = document.getElementById('about'); // Assuming next section has id='about'
-          nextSection?.scrollIntoView({ behavior: 'smooth' });
+          // Use client-side navigation instead of direct DOM manipulation
+          if (typeof window !== 'undefined') {
+            const nextSection = document.getElementById('about'); // Assuming next section has id='about'
+            nextSection?.scrollIntoView({ behavior: 'smooth' });
+          }
         }}
         whileHover={{ scale: 1.1 }}
       >

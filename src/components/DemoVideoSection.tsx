@@ -30,7 +30,7 @@ export default function DemoVideoSection() {
   };
   
   const toggleFullscreen = () => {
-    if (videoRef.current) {
+    if (videoRef.current && typeof document !== 'undefined') {
       if (document.fullscreenElement) {
         document.exitFullscreen();
       } else {
